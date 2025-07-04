@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gemini Insights</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .sidebar {
+            min-height: 100vh;
+            background-color: #343a40;
+            padding: 20px;
+            color: white;
+            transition: margin-left 0.3s;
+        }
+        .sidebar a {
+            color: white;
+            display: block;
+            margin: 10px 0;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+        .main-content {
+            padding: 30px;
+        }
+        .collapsed {
+            margin-left: -250px; /* Adjust based on sidebar width */
+        }
+        .toggle-button {
+            background-color: #007bff; /* Bootstrap primary color */
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            margin-left: 10px; /* Space between title and button */
+        }
+    </style>
+</head>
+<body class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 sidebar" id="sidebar">
+            <span class="logo" id="toggleLogo">✈️</span> <!-- Clickable logo -->
+            <h4>Gemini Insights</h4>
+            <hr>
+            <a href="/">Home</a>
+            <a href="/get_flight_trends">View Trends</a>
+            <a href="/gemini">Data Visualize Options</a>
+            <a href="/logout">Logout</a>
+        </div>
+
+        <div class="col-md-9 main-content">
+            <div class="d-flex align-items-center mb-4">
+                <button class="toggle-button" id="toggleSidebar">Toggle Sidebar</button> <!-- Toggle Sidebar Button -->
+                <h2 class="mb-0">🧠 Gemini-Pro Data Insight
+                </h2>
+               
+               
+            </div>
+             <p>Here you can get insight of the data from the gemini by uploading CSV files.<p>
+
+            <form method="POST" enctype="multipart/form-data" class="mb-4">
+                <input type="file" name="csv" class="form-control mb-3" required>
+                <button class="btn btn-primary">Analyze with Gemini</button>
+            </form>
+
+            {% if summary %}
+            <div class="alert alert-info mt-4">
+                <h5>Gemini Insight:</h5>
+                <pre>{{ summary }}</pre> <!-- Use <pre> for better formatting -->
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle the sidebar
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('collapsed');
+        }
+
+        // Event listener for the logo and the button to toggle the sidebar
+        document.getElementById('toggleLogo').addEventListener('click', toggleSidebar);
+        document.getElementById('toggleSidebar').addEventListener('click', toggleSidebar);
+    </script>
+</body>
+</html>
